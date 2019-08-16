@@ -1,9 +1,15 @@
-x=float(input())
+import pandas as pd
+import numpy as np
 
-if x >= 4.00:
+x1,y1 = np.loadtxt("trainingdata.txt",delimiter=',',unpack=True)
+x=pd.Series(x1)
+y=pd.Series(y1)
 
-    print(8.00)
+r=x.cov(y)/(x.std()*y.std())
 
-else:
+beta1 = (r*y.std())/x.std()
+beta0 = y.mean()- beta1*x.mean()
 
-    print('%.2f'%(2*x))
+b=float(input())
+time= beta0 - beta1*b
+print(time)
